@@ -1,2 +1,2 @@
 # DjangoHW_S-PRO
-DjangoHW_S-PRO
+Home Work for Python/Django Course S-PRO Academy
