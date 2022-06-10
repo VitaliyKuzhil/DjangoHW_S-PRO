@@ -1,4 +1,4 @@
-# DjangoHomeWork_S-PRO
+# DjangoHomeWorkW1_S-PRO
 
 Завдання 1
 
