@@ -1,0 +1,23 @@
+{% extends 'bookstore/index.html' %}
+
+{% block title %}Усі книги{% endblock %}
+
+{% block content %}
+
+
+{% for book in books %}
+
+<div class="card">
+    <div class="card-body">
+        <div class="container">
+            <h5 class="card-title">{{book.book_title|upper}}</h5>
+            <p class="card-text">{{book.book_description|slice:250}}</p>
+            <a class="btn btn-primary" href="{% url 'book_detail' book.book_id %}">Детальніше</a>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+
+{% endblock %}

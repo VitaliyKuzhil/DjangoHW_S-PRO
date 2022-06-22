@@ -1,0 +1,25 @@
+{% extends 'bookstore/index.html' %}
+
+{% block title %}Усі книги автора{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    {% for book in books %}
+    {% if book.author_id == author_id.author_id %}
+    <ul class="list-group">
+        <li class="list-group-item">
+            <h5>{{book.book_title}}</h5>
+            <p>{{book.released_year}}</p>
+            <p>{{book.book_description|slice:250}}</p>
+            <a class="btn btn-primary" href="{% url 'book_detail' book.book_id %}">Детальніше</a>
+        </li>
+        <br>
+    </ul>
+    {% endif %}
+    {% endfor %}
+    <a class="btn btn-primary" href="{% url 'book_list' %}">Список книжок</a>
+    <a class="btn btn-primary" href="{% url 'author_book' author_id.author_id %}">Біографія автора</a>
+</div>
+
+{% endblock %}

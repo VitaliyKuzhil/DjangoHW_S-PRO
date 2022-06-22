@@ -1,0 +1,19 @@
+{% extends 'bookstore/index.html' %}
+
+{% block title %}Деталі книги{% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <div class="card-body">
+        <div class="container">
+            <h5 class="card-title">{{book_title|upper}}</h5>
+            <h6>Рік видавництва: {{released_year}}</h6>
+            <p class="card-text">{{book_description}}</p>
+            <a class="btn btn-primary" href="{% url 'book_list' %}">Список книжок</a>
+            <a class="btn btn-primary" href="{% url 'author_book' author_id %}">Біографія автора</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
