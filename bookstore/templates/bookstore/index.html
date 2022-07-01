@@ -12,9 +12,16 @@
 <body>
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h1 class="display-4">bookstore</h1>
-        <p class="lead">Книги, які варто прочитати</p>
+        <h1 class="display-4"><a href="{% url 'home' %}">bookstore</a></h1>
+            <p class="lead">Книги, які варто прочитати</p>
+        <div class="d-flex justify-content-xl-end">
+            <a class="btn btn-primary m-1" href="{% url 'book_list' %}">Список книжок</a>
+            <a class="btn btn-primary m-1" href="{% url 'author_list' %}">Список авторів</a>
+            <a class="btn btn-primary m-1" href="{% url 'add_book' %}">Додати книжку</a>
+            <a class="btn btn-primary m-1" href="{% url 'add_author' %}">Додати автора</a>
+        </div>
         <hr class="my-4">
+
     </div>
 </div>
 

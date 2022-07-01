@@ -10,14 +10,14 @@
     </form>
 </div>
 
-{% for book in books %}
+{% for author in authors %}
 
 <div class="card">
     <div class="card-body">
         <div class="container">
-            <h5 class="card-title">{{book.book_title|upper}}</h5>
-            <p class="card-text">{{book.book_description|slice:250}}</p>
-            <a class="btn btn-primary" href="{% url 'book_detail' book.id %}">Детальніше</a>
+            <h5 class="card-title">{{author.first_name}} {{author.last_name}}</h5>
+            <p class="card-text">{{author.about_author|slice:250}}</p>
+            <a class="btn btn-primary" href="{% url 'author_book' author.id %}">Біографія автора</a>
         </div>
     </div>
 </div>

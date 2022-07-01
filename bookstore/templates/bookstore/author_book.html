@@ -7,10 +7,10 @@
 <div class="card">
     <div class="card-body">
         <div class="container">
-            <h5 class="card-title">{{first_name}} {{last_name}}</h5>
-            <p class="card-text">{{about_author}}</p>
+            <h5 class="card-title">{{author.first_name}} {{author.last_name}}</h5>
+            <p class="card-text">{{author.about_author}}</p>
             <a class="btn btn-primary" href="{% url 'book_list' %}">Список книжок</a>
-            <a class="btn btn-primary" href="{% url 'books_author' author_id %}">Усі книги автора</a>
+            <a class="btn btn-primary" href="{% url 'books_author' author.id %}">Усі книги автора</a>
         </div>
     </div>
 </div>
