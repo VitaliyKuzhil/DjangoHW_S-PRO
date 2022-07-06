@@ -11,24 +11,13 @@
 </head>
 <body>
 <div class="jumbotron jumbotron-fluid">
-    <div class="container position-sticky">
-        <h1 class="display-4"><a href="{% url 'home' %}">bookstore</a></h1>
+    <div class="container">
+        <h1 class="display-4"><a href="{% url 'register' %}">bookstore</a></h1>
             <p class="lead">Книги, які варто прочитати</p>
 
         <div class="position-absolute top-0 end-0 m-3">
-            {% if user.is_authenticated %}
-            <h3>{{ user.username }}</h3>
-            <a class="btn btn-primary m-1" href="{% url 'logout' %}">Вийти</a>
-            {% endif %}
-        </div>
-
-        <hr class="my-4">
-
-        <div class="d-flex justify-content-xl-end">
-            <a class="btn btn-primary m-1" href="{% url 'book_list' %}">Список книжок</a>
-            <a class="btn btn-primary m-1" href="{% url 'author_list' %}">Список авторів</a>
-            <a class="btn btn-primary m-1" href="{% url 'add_book' %}">Додати книжку</a>
-            <a class="btn btn-primary m-1" href="{% url 'add_author' %}">Додати автора</a>
+            <a class="btn btn-primary m-1" href="{% url 'register' %}">Реєстрвція</a>
+            <a class="btn btn-primary m-1" href="{% url 'login' %}">Авторизація</a>
         </div>
         <hr class="my-4">
 

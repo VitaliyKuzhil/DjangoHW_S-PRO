@@ -10,6 +10,45 @@
             <h5 class="card-title">{{book.book_title|upper}}</h5>
             <h6>Рік видавництва: {{book.released_year}}</h6>
             <p class="card-text">{{book.book_description}}</p>
+
+            {% if user.is_authenticated %}
+                <h4>Створити рецензію:</h4>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                    <button type="submit" class="btn btn-primary btn-block">Додати рецензію</button>
+                </form>
+            {% endif %}
+
+            <div>
+                <h4>Рецензії:</h4>
+                {% for i in review %}
+                {% if i.book_id == book.id %}
+                <div class="card text-center">
+                    <div class="card-header">
+                        {{ i.user }}
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ i.review_description }}</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ i.create_time }}
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+
             <a class="btn btn-primary" href="{% url 'book_list' %}">Список книжок</a>
             <a class="btn btn-primary" href="{% url 'author_book' book.author_id %}">Біографія автора</a>
         </div>

@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 # books = [
@@ -189,3 +190,14 @@ class Book(models.Model):
 
     def __str__(self):
         return self.book_title
+
+
+class Review(models.Model):
+    book_id = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name='Book ID')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    review_description = models.TextField(verbose_name='Review')
+    create_time = models.DateTimeField(auto_now_add=True)
+    update_time = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.pk}, book: {self.book_id}, user: {self.user}"

@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from bookstore.models import Book, Author
+from bookstore.models import Book, Author, Review
 
 
 class BookForm(forms.ModelForm):
@@ -25,6 +25,13 @@ class BookForm(forms.ModelForm):
         widgets = {
             'author': forms.Select(attrs={'class': 'form-control'})
         }
+
+
+class ReviewForm(forms.ModelForm):
+
+    class Meta:
+        model = Review
+        fields = ['review_description']
 
 
 class AuthorForm(forms.ModelForm):

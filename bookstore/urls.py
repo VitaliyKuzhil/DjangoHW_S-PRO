@@ -1,14 +1,15 @@
 from django.urls import path
 
-from .views import book_list, book_detail, author_book, books_author, add_book, author_list, add_author, home
+from .views import BookView, HomeView, \
+    AuthorView, BookDetailView, AuthorDetailView, AuthorBooksDetailView, AddBookView, AddAuthorView
 
 urlpatterns = [
-    path('', home, name='home'),
-    path('books/', book_list, name='book_list'),
-    path('authors/', author_list, name='author_list'),
-    path('books/<int:book_index>/', book_detail, name='book_detail'),
-    path('books/author/<int:author_index>', author_book, name='author_book'),
-    path('books/author/book/<int:author_index>', books_author, name='books_author'),
-    path('add_book/', add_book, name="add_book"),
-    path('add_author/', add_author, name="add_author")
+    path('', HomeView.as_view(), name='home'),
+    path('books/', BookView.as_view(), name='book_list'),
+    path('authors/', AuthorView.as_view(), name='author_list'),
+    path('books/<int:pk>/', BookDetailView.as_view(), name='book_detail'),
+    path('books/author/<int:pk>', AuthorDetailView.as_view(), name='author_book'),
+    path('books/author/author_book/<int:author_index>', AuthorBooksDetailView.as_view(), name='books_author'),
+    path('add_book/', AddBookView.as_view(), name="add_book"),
+    path('add_author/', AddAuthorView.as_view(), name="add_author")
 ]
