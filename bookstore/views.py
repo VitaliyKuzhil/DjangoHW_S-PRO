@@ -36,37 +36,6 @@ class BookView(View):
         return render(request, 'bookstore/book_list.html', context=context)
 
 
-class ReviewView(View):
-    def post(self, request: HttpRequest, book_index):
-        book = get_object_or_404(Book, pk=book_index)
-        review = get_list_or_404(Review)
-        form = ReviewForm()
-        context = {
-            'book': book,
-            'review': review,
-            'form': form
-        }
-        if request.method == 'POST':
-            form = ReviewForm(request.POST)
-            if form.is_valid():
-                description = request.POST.get('review_description')
-                form = Review.objects.create(book_id=book, user=request.user, review_description=description)
-                form.save()
-                return redirect('book', pk=book_index)
-        return render(request, 'book_detail.html', context)
-
-    def get(self, request: HttpRequest, book_index):
-        book = get_object_or_404(Book, pk=book_index)
-        review = get_list_or_404(Review)
-        form = ReviewForm()
-        context = {
-            'book': book,
-            'review': review,
-            'form': form
-        }
-        return render(request, 'book_detail.html', context)
-
-
 class AuthorView(View):
     def post(self, request: HttpRequest):
         authors = Author.objects.all().order_by('-id')
@@ -85,9 +54,25 @@ class AuthorView(View):
         return render(request, 'bookstore/author_list.html', context=context)
 
 
-class BookDetailView(DetailView):
-    model = Book
-    template_name = 'bookstore/book_detail.html'
+class BookDetailView(View):
+    def get(self, request: HttpRequest, pk):
+        book = get_object_or_404(Book, pk=pk)
+        form = ReviewForm()
+        context = {"form": form, "book": book}
+        return render(request, 'bookstore/book_detail.html', context)
+
+    def post(self, request: HttpRequest, pk):
+        form = ReviewForm(request.POST)
+        book = get_object_or_404(Book, pk=pk)
+        context = {"form": form, "book": book}
+        if form.is_valid():
+            form.book_id = book
+            form.save(commit=False)
+            description = request.POST.get('review_description')
+            form = Review.objects.create(book_id=book, user=request.user, review_description=description)
+            form.save()
+            return redirect('book_detail', pk=pk)
+        return render(request, 'bookstore/book_detail.html', context=context)
 
 
 class AuthorDetailView(DetailView):
@@ -97,10 +82,10 @@ class AuthorDetailView(DetailView):
 
 class AuthorBooksDetailView(View):
     def get(self, request: HttpRequest, author_index):
-        books = Book.objects.all()
+        books = Book.objects.filter(author=author_index)
         context = {
-            'author': author_index,
-            'books': books
+            'books': books,
+            'author_index': author_index
         }
         return render(request, 'bookstore/books_author.html', context=context)
 

@@ -193,7 +193,7 @@ class Book(models.Model):
 
 
 class Review(models.Model):
-    book_id = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name='Book ID')
+    book_id = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='reviews')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     review_description = models.TextField(verbose_name='Review')
     create_time = models.DateTimeField(auto_now_add=True)

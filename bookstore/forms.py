@@ -28,6 +28,9 @@ class BookForm(forms.ModelForm):
 
 
 class ReviewForm(forms.ModelForm):
+    review_description = forms.CharField(label='Текст рецензії',
+                                         widget=forms.Textarea(attrs={'class': 'form-control', "rows": 3})
+                                         )
 
     class Meta:
         model = Review
